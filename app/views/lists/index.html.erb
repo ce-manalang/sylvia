@@ -1,0 +1,6 @@
+<div class="my-3">
+  <%= link_to "New list", new_list_path(format: 'js'), class: 'btn btn-primary', remote: true %>
+</div>
+<div id="lists">
+  <%= render @lists %>
+</div>
