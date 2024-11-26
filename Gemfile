@@ -56,7 +56,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "rspec-rails", "~> 7.0"
+  gem "rspec-rails", "~> 7.1"
   gem "factory_bot_rails", "~> 6.4"
   gem 'stimulus_reflex_testing', git: 'https://github.com/podia/stimulus_reflex_testing'
 end
