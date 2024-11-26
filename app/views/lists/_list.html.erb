@@ -1,0 +1,25 @@
+<div class="row my-3" data-controller="list" data-list-id="<%= list.id %>" id="<%= dom_id(list) %>" data-reflex-root="#<%= dom_id(list) %>">
+  <div class="col">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <%= list.name %>
+        <%= link_to "Delete", list_path(list), method: :delete, class: "text-danger", remote: true, data: { turbo_confirm: "Are you sure you want to delete #{list.name}?", turbo_method: :delete } %>
+      </div>
+      <div class="card-body p-0">
+        <div class="list-group list-group-flush" id="incomplete-tasks" data-list-target="tasks">
+          <%= render list.tasks.incomplete %>
+        </div>
+        <div class="list-group list-group-flush border-top" id="complete-tasks">
+          <%= render list.tasks.complete %>
+        </div>
+        <h5 id="no-tasks" class="p-4 mb-0 <%= 'd-none' if list.tasks.any? %>">No tasks</h5>
+      </div>
+      <div class="card-footer">
+        <%= bootstrap_form_with model: @new_task, id: "task-form-for-list-#{list.id}", url: '', layout: :inline, data: { reflex: "submit->List#create_task", list_id: list.to_sgid.to_s, list_target: "form" } do |form| %>
+          <%= form.text_field :name, skip_label: true, wrapper_class: "flex-fill mr-2", class: "w-100", placeholder: "What needs to be done?" %>
+          <%= form.submit "Add task" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
