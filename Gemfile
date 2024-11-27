@@ -63,7 +63,7 @@ end
 
 gem "stimulus_reflex", "~> 3.5"
 
-gem "redis-session-store", "~> 0.11.5"
+gem "redis-session-store", "~> 0.11.6"
 
 gem "sassc-rails", "~> 2.1"
 
