@@ -76,3 +76,5 @@ gem "acts_as_list", "~> 1.2"
 gem "devise", "~> 4.9"
 
 gem "devise-bootstrap-views", "~> 1.1"
+
+gem "tailwindcss-rails", "~> 3.0"
