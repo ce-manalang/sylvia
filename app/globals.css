@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Only keep styles that can't be easily done with Tailwind */
+@layer base {
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Custom scrollbar that doesn't take up space */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+}
