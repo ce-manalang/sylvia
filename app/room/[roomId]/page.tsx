@@ -85,37 +85,37 @@ export default function RoomPage() {
     ])
 
     // Simulate other users joining (for demo purposes)
-    if (isHost) {
-      setTimeout(() => {
-        const newUsers = [
-          { id: "user-alex", name: "Alex", isHost: false, score: 0 },
-          { id: "user-jordan", name: "Jordan", isHost: false, score: 0 },
-        ]
+    // if (isHost) {
+    //   setTimeout(() => {
+    //     const newUsers = [
+    //       { id: "user-alex", name: "Alex", isHost: false, score: 0 },
+    //       { id: "user-jordan", name: "Jordan", isHost: false, score: 0 },
+    //     ]
 
-        setUsers((prev) => [...prev, ...newUsers])
+    //     setUsers((prev) => [...prev, ...newUsers])
 
-        // Add join messages with stable IDs
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `join-alex-${roomId}`,
-            userId: "system",
-            username: "System",
-            text: `${newUsers[0].name} joined the room`,
-            timestamp: new Date(),
-            type: "system",
-          },
-          {
-            id: `join-jordan-${roomId}`,
-            userId: "system",
-            username: "System",
-            text: `${newUsers[1].name} joined the room`,
-            timestamp: new Date(),
-            type: "system",
-          },
-        ])
-      }, 1500)
-    }
+    //     // Add join messages with stable IDs
+    //     setMessages((prev) => [
+    //       ...prev,
+    //       {
+    //         id: `join-alex-${roomId}`,
+    //         userId: "system",
+    //         username: "System",
+    //         text: `${newUsers[0].name} joined the room`,
+    //         timestamp: new Date(),
+    //         type: "system",
+    //       },
+    //       {
+    //         id: `join-jordan-${roomId}`,
+    //         userId: "system",
+    //         username: "System",
+    //         text: `${newUsers[1].name} joined the room`,
+    //         timestamp: new Date(),
+    //         type: "system",
+    //       },
+    //     ])
+    //   }, 1500)
+    // }
 
     setIsInitialized(true)
   }, [mounted, isInitialized, username, isHost, roomId])
