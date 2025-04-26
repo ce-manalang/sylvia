@@ -14,6 +14,7 @@ import ChatMessage from "@/components/chat-message"
 import { generateQuestions } from "@/lib/questions"
 import type { User, Question, Message, Answer } from "@/lib/types"
 import { useMobile } from "@/hooks/use-mobile"
+import { useMounted } from "@/hooks/use-mounted"
 
 // Add at the top of the file, after the imports
 type ExtendedMessage = Message & {
@@ -21,6 +22,11 @@ type ExtendedMessage = Message & {
   targetUserId?: string
   level?: number
   category?: string
+}
+
+// Helper function to generate stable IDs
+const generateStableId = (prefix: string, seed: string) => {
+  return `${prefix}-${seed}`
 }
 
 export default function RoomPage() {
@@ -31,6 +37,7 @@ export default function RoomPage() {
   const username = searchParams.get("username") || "Anonymous"
   const isHost = searchParams.get("isHost") === "true"
   const isMobile = useMobile()
+  const mounted = useMounted()
 
   const [users, setUsers] = useState<User[]>([])
   const [questions, setQuestions] = useState<Question[]>([])
@@ -41,15 +48,18 @@ export default function RoomPage() {
   const [answers, setAnswers] = useState<Answer[]>([])
   const [showingAnswers, setShowingAnswers] = useState(false)
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
+  const [isInitialized, setIsInitialized] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   // Initialize the room
   useEffect(() => {
-    // Add current user
+    if (!mounted || isInitialized) return
+
+    // Add current user with a stable ID
     const currentUser: User = {
-      id: Date.now().toString(),
+      id: `user-${username}-${roomId}`,
       name: username,
       isHost,
       score: 0,
@@ -62,10 +72,10 @@ export default function RoomPage() {
     const generatedQuestions = generateQuestions()
     setQuestions(generatedQuestions)
 
-    // Add welcome message
+    // Add welcome message with a stable ID
     setMessages([
       {
-        id: "welcome",
+        id: `welcome-${roomId}`,
         userId: "system",
         username: "System",
         text: `Welcome to Room ${roomId}! Type /card to draw a question card about someone in the room.`,
@@ -78,17 +88,17 @@ export default function RoomPage() {
     if (isHost) {
       setTimeout(() => {
         const newUsers = [
-          { id: "user2", name: "Alex", isHost: false, score: 0 },
-          { id: "user3", name: "Jordan", isHost: false, score: 0 },
+          { id: "user-alex", name: "Alex", isHost: false, score: 0 },
+          { id: "user-jordan", name: "Jordan", isHost: false, score: 0 },
         ]
 
         setUsers((prev) => [...prev, ...newUsers])
 
-        // Add join messages
+        // Add join messages with stable IDs
         setMessages((prev) => [
           ...prev,
           {
-            id: `join-${newUsers[0].id}`,
+            id: `join-alex-${roomId}`,
             userId: "system",
             username: "System",
             text: `${newUsers[0].name} joined the room`,
@@ -96,7 +106,7 @@ export default function RoomPage() {
             type: "system",
           },
           {
-            id: `join-${newUsers[1].id}`,
+            id: `join-jordan-${roomId}`,
             userId: "system",
             username: "System",
             text: `${newUsers[1].name} joined the room`,
@@ -107,7 +117,13 @@ export default function RoomPage() {
       }, 1500)
     }
 
-    // Detect keyboard open/close on mobile
+    setIsInitialized(true)
+  }, [mounted, isInitialized, username, isHost, roomId])
+
+  // Handle keyboard detection only after mounting
+  useEffect(() => {
+    if (!mounted) return
+
     const handleResize = () => {
       if (isMobile) {
         const isKeyboard = window.innerHeight < window.outerHeight * 0.75
@@ -119,12 +135,14 @@ export default function RoomPage() {
     return () => {
       window.removeEventListener("resize", handleResize)
     }
-  }, [username, isHost, roomId, isMobile])
+  }, [mounted, isMobile])
 
   // Scroll to bottom of messages when new messages are added
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [messages])
+    if (mounted) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [messages, mounted])
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault()
@@ -137,7 +155,7 @@ export default function RoomPage() {
     } else {
       // Regular message
       const newMessage: Message = {
-        id: Date.now().toString(),
+        id: generateStableId("msg", `${currentUser?.id}-${Date.now()}`),
         userId: currentUser?.id || "",
         username: currentUser?.name || "",
         text: messageInput,
@@ -151,7 +169,7 @@ export default function RoomPage() {
     setMessageInput("")
 
     // On mobile, focus back on input after sending
-    if (isMobile) {
+    if (isMobile && mounted) {
       setTimeout(() => {
         inputRef.current?.focus()
       }, 50)
@@ -159,6 +177,8 @@ export default function RoomPage() {
   }
 
   const handleCardCommand = () => {
+    if (!mounted || !currentUser) return
+
     // Parse command for target user
     const commandParts = messageInput.split(" ")
     let targetUsername = ""
@@ -173,10 +193,12 @@ export default function RoomPage() {
     if (targetUsername) {
       selectedUser = users.find((u) => u.name.toLowerCase() === targetUsername.toLowerCase()) || null
     } else {
-      // Randomly select a user that isn't the current user
+      // Deterministically select a user that isn't the current user
       const otherUsers = users.filter((u) => u.id !== currentUser?.id)
       if (otherUsers.length > 0) {
-        selectedUser = otherUsers[Math.floor(Math.random() * otherUsers.length)]
+        // Use a stable selection method
+        const index = (currentUser.name.length + roomId.length) % otherUsers.length
+        selectedUser = otherUsers[index]
       }
     }
 
@@ -185,7 +207,7 @@ export default function RoomPage() {
       setMessages((prev) => [
         ...prev,
         {
-          id: `error-${Date.now()}`,
+          id: generateStableId("error", `${targetUsername}-${Date.now()}`),
           userId: "system",
           username: "System",
           text: `Couldn't find user "${targetUsername}". Try again with a valid username.`,
@@ -201,7 +223,7 @@ export default function RoomPage() {
       setMessages((prev) => [
         ...prev,
         {
-          id: `error-${Date.now()}`,
+          id: generateStableId("error", `self-${Date.now()}`),
           userId: "system",
           username: "System",
           text: `You can't draw a card about yourself. Choose another player.`,
@@ -212,17 +234,18 @@ export default function RoomPage() {
       return
     }
 
-    // Select a random question
-    const randomQuestion = questions[Math.floor(Math.random() * questions.length)]
+    // Select a question deterministically
+    const questionIndex = (currentUser.name.length + selectedUser.name.length + roomId.length) % questions.length
+    const selectedQuestion = questions[questionIndex]
 
     // Format the question text
-    const formattedQuestion = randomQuestion.text.replace("[name]", selectedUser.name + "'s")
+    const formattedQuestion = selectedQuestion.text.replace("[name]", selectedUser.name + "'s")
 
     // Add question card message
     setMessages((prev) => [
       ...prev,
       {
-        id: `card-${Date.now()}`,
+        id: generateStableId("card", `${selectedUser.id}-${Date.now()}`),
         userId: "system",
         username: "System",
         text: `${currentUser?.name} drew a question card about ${selectedUser.name}!`,
@@ -230,31 +253,31 @@ export default function RoomPage() {
         type: "system",
       },
       {
-        id: `question-${Date.now()}`,
+        id: generateStableId("question", `${selectedQuestion.id}-${Date.now()}`),
         userId: "question",
         username: "Question",
         text: formattedQuestion,
         timestamp: new Date(),
         type: "question",
-        questionId: randomQuestion.id,
+        questionId: selectedQuestion.id,
         targetUserId: selectedUser.id,
-        level: randomQuestion.level,
-        category: randomQuestion.category || "General",
+        level: selectedQuestion.level,
+        category: selectedQuestion.category || "General",
       },
     ])
 
     // Vibrate on mobile devices when a card is drawn
-    if (isMobile && navigator.vibrate) {
+    if (mounted && isMobile && navigator.vibrate) {
       navigator.vibrate(200)
     }
   }
 
   const handleAnswerInChat = (questionId: string, targetUserId: string) => {
-    if (!messageInput.trim() || !currentUser) return
+    if (!messageInput.trim() || !currentUser || !mounted) return
 
     // Create new answer
     const newAnswer: Answer = {
-      id: Date.now().toString(),
+      id: generateStableId("answer", `${questionId}-${currentUser.id}-${Date.now()}`),
       questionId: questionId,
       targetUserId: targetUserId,
       userId: currentUser.id,
@@ -270,7 +293,7 @@ export default function RoomPage() {
     setMessages((prev) => [
       ...prev,
       {
-        id: `answer-${newAnswer.id}`,
+        id: generateStableId("answer-msg", `${newAnswer.id}`),
         userId: currentUser.id,
         username: currentUser.name,
         text: messageInput,
@@ -286,11 +309,13 @@ export default function RoomPage() {
   }
 
   const handleShowAnswers = (targetUserId: string) => {
+    if (!mounted) return
     setTargetUser(users.find((u) => u.id === targetUserId) || null)
     setShowingAnswers(true)
   }
 
   const handleCloseAnswers = () => {
+    if (!mounted) return
     setShowingAnswers(false)
     setTargetUser(null)
   }
@@ -301,6 +326,15 @@ export default function RoomPage() {
 
   // Filter answers for the current target user
   const filteredAnswers = answers.filter((a) => a.targetUserId === targetUser?.id)
+
+  // Don't render anything during server-side rendering or hydration
+  if (!mounted) {
+    return (
+      <div className="flex min-h-[100dvh] items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <main className="flex flex-col h-[100dvh] bg-gradient-to-b from-purple-50 to-blue-50 overflow-hidden">
