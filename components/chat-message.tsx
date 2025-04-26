@@ -1,7 +1,10 @@
+"use client"
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import type { Message, User } from "@/lib/types"
+import { useMounted } from "@/hooks/use-mounted"
 
 interface ExtendedMessage extends Message {
   questionId?: string
@@ -18,12 +21,16 @@ interface ChatMessageProps {
 }
 
 export default function ChatMessage({ message, isCurrentUser, onAnswer, currentUser }: ChatMessageProps) {
-  // Format timestamp
-  const formattedTime = new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  }).format(new Date(message.timestamp))
+  const mounted = useMounted()
+
+  // Only format time on the client after mounting to avoid hydration mismatch
+  const formattedTime = mounted
+    ? new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }).format(new Date(message.timestamp))
+    : "00:00 AM"
 
   if (message.type === "system") {
     return (
@@ -46,16 +53,18 @@ export default function ChatMessage({ message, isCurrentUser, onAnswer, currentU
                 Level {message.level}
               </Badge>
             </div>
-            <span className="text-xs text-gray-500">{formattedTime}</span>
+            <span className="text-xs text-gray-500" suppressHydrationWarning>
+              {formattedTime}
+            </span>
           </div>
 
           <div className="text-base font-medium text-purple-800 mb-2">"{message.text}"</div>
 
-          {onAnswer && currentUser && message.targetUserId !== currentUser.id && (
+          {mounted && onAnswer && currentUser && message.targetUserId !== currentUser.id && (
             <div className="text-xs text-gray-600 mt-2">Type your answer in the chat to respond to this question.</div>
           )}
 
-          {currentUser && message.targetUserId === currentUser.id && (
+          {mounted && currentUser && message.targetUserId === currentUser.id && (
             <div className="text-xs text-gray-600 mt-2">
               This question is about you. Your co-players will answer it.
             </div>
@@ -75,7 +84,7 @@ export default function ChatMessage({ message, isCurrentUser, onAnswer, currentU
 
           <div>
             <div className={cn("flex items-center", isCurrentUser ? "justify-end" : "justify-start")}>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500" suppressHydrationWarning>
                 {!isCurrentUser && `${message.username} • `}
                 {formattedTime}
               </span>
@@ -107,7 +116,7 @@ export default function ChatMessage({ message, isCurrentUser, onAnswer, currentU
 
         <div>
           <div className={cn("flex items-center", isCurrentUser ? "justify-end" : "justify-start")}>
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500" suppressHydrationWarning>
               {!isCurrentUser && `${message.username} • `}
               {formattedTime}
             </span>

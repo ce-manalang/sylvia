@@ -5,12 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
+import { useMounted } from "@/hooks/use-mounted"
 
 export default function Home() {
   const [roomCode, setRoomCode] = useState("")
   const [username, setUsername] = useState("")
   const [error, setError] = useState("")
   const router = useRouter()
+  const mounted = useMounted()
 
   const handleJoinRoom = () => {
     if (!username.trim()) {
@@ -32,16 +34,42 @@ export default function Home() {
       return
     }
 
-    // Generate a random 6-character room code
-    const newRoomCode = Math.random().toString(36).substring(2, 8).toUpperCase()
+    // Generate a deterministic room code based on username and timestamp
+    const generateRoomCode = () => {
+      if (!mounted) return "LOADING"
+
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      const timestamp = new Date().getTime().toString()
+      const seed = username + timestamp
+      let result = ""
+
+      // Use a deterministic algorithm based on the seed
+      for (let i = 0; i < 6; i++) {
+        const charIndex = (seed.charCodeAt(i % seed.length) + i) % chars.length
+        result += chars.charAt(charIndex)
+      }
+
+      return result
+    }
+
+    const newRoomCode = generateRoomCode()
     router.push(`/room/${newRoomCode}?username=${encodeURIComponent(username)}&isHost=true`)
+  }
+
+  // Show a simple loading state during SSR and hydration
+  if (!mounted) {
+    return (
+      <main className="flex min-h-[100dvh] flex-col items-center justify-center p-4 bg-gradient-to-b from-purple-50 to-blue-50">
+        <p>Loading...</p>
+      </main>
+    )
   }
 
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center p-4 bg-gradient-to-b from-purple-50 to-blue-50">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-purple-800">Question Card Game</CardTitle>
+          <CardTitle className="text-2xl font-bold text-purple-800">YASCG</CardTitle>
           <CardDescription>Join a room or create your own to start playing!</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
