@@ -13,13 +13,13 @@ export default function Home() {
   const router = useRouter()
 
   const handleJoinRoom = () => {
-    if (!roomCode.trim()) {
-      setError("Please enter a room code")
+    if (!username.trim()) {
+      setError("Please enter a username")
       return
     }
 
-    if (!username.trim()) {
-      setError("Please enter a username")
+    if (!roomCode.trim()) {
+      setError("Please enter a room code")
       return
     }
 
@@ -55,6 +55,7 @@ export default function Home() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="h-12 text-base select-text"
+              aria-invalid={error.includes("username")}
             />
           </div>
 
@@ -68,10 +69,15 @@ export default function Home() {
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
               className="h-12 text-base select-text"
+              aria-invalid={error.includes("room code")}
             />
           </div>
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm" data-testid="error-message">
+              {error}
+            </p>
+          )}
         </CardContent>
         <CardFooter className="flex flex-col space-y-3">
           <Button className="w-full bg-purple-600 hover:bg-purple-700 h-12 text-base" onClick={handleJoinRoom}>

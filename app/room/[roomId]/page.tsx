@@ -307,7 +307,7 @@ export default function RoomPage() {
       {/* Mobile header */}
       <div className="flex justify-between items-center p-3 border-b bg-white shadow-sm">
         <div className="flex items-center">
-          <Button variant="ghost" size="icon" onClick={leaveRoom} className="mr-2">
+          <Button variant="ghost" size="icon" onClick={leaveRoom} aria-label="Leave Room" className="mr-2">
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
