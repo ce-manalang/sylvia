@@ -108,7 +108,7 @@ export default function Home() {
           )}
         </CardContent>
         <CardFooter className="flex flex-col space-y-3">
-          <Button className="w-full bg-purple-600 hover:bg-purple-700 h-12 text-base" onClick={handleJoinRoom}>
+          <Button className="w-full bg-purple-600 hover:bg-purple-700 h-12 text-white" onClick={handleJoinRoom}>
             Join Room
           </Button>
           <div className="relative w-full text-center my-1">
@@ -119,7 +119,7 @@ export default function Home() {
               <span className="bg-white px-2 text-gray-500">or</span>
             </div>
           </div>
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 h-12 text-base" onClick={handleCreateRoom}>
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 h-12 text-white" onClick={handleCreateRoom}>
             Create New Room
           </Button>
         </CardFooter>
