@@ -10,7 +10,7 @@ export default function MarketingPage() {
     <div className="flex flex-col min-h-[100dvh]">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60  px-4 md:px-6">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-16 items-center justify-between mx-auto">
           <div className="flex items-center gap-2">
             <span className="font-bold text-xl text-purple-800">YASCG</span>
           </div>
@@ -27,7 +27,7 @@ export default function MarketingPage() {
           </nav>
           <div>
             <Link href="/" passHref>
-              <Button className="bg-purple-600 hover:bg-purple-700">Play Now</Button>
+              <Button className="bg-purple-600 text-white hover:bg-purple-700">Play Now</Button>
             </Link>
           </div>
         </div>
@@ -36,7 +36,7 @@ export default function MarketingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-purple-50 to-blue-50">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="space-y-4">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-purple-800">
@@ -48,7 +48,7 @@ export default function MarketingPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/" passHref>
-                    <Button className="bg-purple-600 hover:bg-purple-700 h-12 px-8">Start Playing</Button>
+                    <Button className="bg-purple-600 text-white hover:bg-purple-700 h-12 px-8">Start Playing</Button>
                   </Link>
                   <Link href="#how-to-play" passHref>
                     <Button variant="outline" className="h-12 px-8">
@@ -72,7 +72,7 @@ export default function MarketingPage() {
 
         {/* Features Section */}
         <section id="features" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-purple-800">
@@ -136,7 +136,7 @@ export default function MarketingPage() {
 
         {/* How to Play Section */}
         <section id="how-to-play" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-blue-50 to-purple-50">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-purple-800">
@@ -193,8 +193,8 @@ export default function MarketingPage() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-purple-800">
@@ -241,11 +241,11 @@ export default function MarketingPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* FAQ Section */}
         <section id="faq" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-purple-50 to-blue-50">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-purple-800">
@@ -299,7 +299,7 @@ export default function MarketingPage() {
 
         {/* CTA Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-purple-800 text-white">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ready to Play?</h2>
@@ -322,7 +322,7 @@ export default function MarketingPage() {
 
       {/* Footer */}
       <footer className="w-full border-t py-6 md:py-8">
-        <div className="container flex flex-col md:flex-row items-center justify-between gap-4 px-4 md:px-6">
+        <div className="container flex flex-col md:flex-row items-center justify-between gap-4 px-4 md:px-6 mx-auto">
           <div className="flex items-center gap-2">
             <span className="font-bold text-purple-800">YASCG</span>
             <p className="text-sm text-gray-500">© 2023 Yet Another Strangers Card Game</p>

@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import MarketingLayoutClient from "./MarketingLayoutClient"
 
 export const metadata: Metadata = {
   title: "YASCG - Yet Another Strangers Card Game",
@@ -11,5 +12,5 @@ export default function MarketingLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <div className="min-h-screen">{children}</div>
+  return <MarketingLayoutClient>{children}</MarketingLayoutClient>
 }
