@@ -2,7 +2,7 @@
 
 A real-time, mobile-optimized web application that lets friends play a question-based game together. Players can create rooms, join existing ones, and take turns answering questions about each other.
 
-![Yet Another Strangers Card Game](/placeholder.svg?height=400&width=800&query=mobile%20chat%20app%20with%20question%20cards%20interface)
+![Yet Another Strangers Card Game](https://sylvia-sooty.vercel.app/mobile-card-game-friends.png)
 
 ## Features
 
