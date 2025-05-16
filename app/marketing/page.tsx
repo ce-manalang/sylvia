@@ -1,14 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Users, MessageSquare, Trophy, Star, ArrowRight } from "lucide-react";
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Users, MessageSquare, Trophy, Star, ArrowRight } from "lucide-react"
 
 export default function MarketingPage() {
   return (
@@ -20,30 +15,19 @@ export default function MarketingPage() {
             <span className="font-bold text-xl text-purple-800">YASCG</span>
           </div>
           <nav className="hidden md:flex gap-6">
-            <Link
-              href="#features"
-              className="text-sm font-medium hover:text-purple-600 transition-colors"
-            >
+            <Link href="#features" className="text-sm font-medium hover:text-purple-600 transition-colors">
               Features
             </Link>
-            <Link
-              href="#how-to-play"
-              className="text-sm font-medium hover:text-purple-600 transition-colors"
-            >
+            <Link href="#how-to-play" className="text-sm font-medium hover:text-purple-600 transition-colors">
               How to Play
             </Link>
-            <Link
-              href="#faq"
-              className="text-sm font-medium hover:text-purple-600 transition-colors"
-            >
+            <Link href="#faq" className="text-sm font-medium hover:text-purple-600 transition-colors">
               FAQ
             </Link>
           </nav>
           <div>
             <Link href="/" passHref>
-              <Button className="bg-purple-600 hover:bg-purple-700">
-                Play Now
-              </Button>
+              <Button className="bg-purple-600 hover:bg-purple-700">Play Now</Button>
             </Link>
           </div>
         </div>
@@ -59,15 +43,12 @@ export default function MarketingPage() {
                   Get to Know Your Friends Better
                 </h1>
                 <p className="max-w-[600px] text-gray-600 md:text-xl">
-                  YASCG is a fun, interactive card game that helps you discover
-                  surprising insights about your friends and family through
-                  engaging questions and answers.
+                  YASCG is a fun, interactive card game that helps you discover surprising insights about your friends
+                  and family through engaging questions and answers.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/" passHref>
-                    <Button className="bg-purple-600 hover:bg-purple-700 h-12 px-8">
-                      Start Playing
-                    </Button>
+                    <Button className="bg-purple-600 hover:bg-purple-700 h-12 px-8">Start Playing</Button>
                   </Link>
                   <Link href="#how-to-play" passHref>
                     <Button variant="outline" className="h-12 px-8">
@@ -79,7 +60,7 @@ export default function MarketingPage() {
               <div className="relative h-[350px] lg:h-[500px] rounded-xl overflow-hidden shadow-xl">
                 <Image
                   src="/mobile-card-game-friends.png"
-                  alt="Friends playing YASCG"
+                  alt="Illustration of friends playing YASCG"
                   fill
                   priority={false}
                   className="object-cover"
@@ -98,8 +79,8 @@ export default function MarketingPage() {
                   Game Features
                 </h2>
                 <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Discover what makes YASCG the perfect game for parties,
-                  team-building, or just hanging out with friends.
+                  Discover what makes YASCG the perfect game for parties, team-building, or just hanging out with
+                  friends.
                 </p>
               </div>
             </div>
@@ -114,8 +95,7 @@ export default function MarketingPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Play with friends anywhere, anytime. Create a room, share
-                      the code, and start playing instantly.
+                      Play with friends anywhere, anytime. Create a room, share the code, and start playing instantly.
                     </p>
                   </CardContent>
                 </Card>
@@ -128,8 +108,8 @@ export default function MarketingPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      From casual to deep, our questions are designed to spark
-                      interesting conversations and reveal surprising insights.
+                      From casual to deep, our questions are designed to spark interesting conversations and reveal
+                      surprising insights.
                     </p>
                   </CardContent>
                 </Card>
@@ -142,29 +122,20 @@ export default function MarketingPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Earn points for your answers and climb the leaderboard.
-                      Who knows their friends best?
+                      Earn points for your answers and climb the leaderboard. Who knows their friends best?
                     </p>
                   </CardContent>
                 </Card>
               </div>
               <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
-                <Image
-                  src="/modern-mobile-interface.png"
-                  alt="YASCG app interface"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/modern-mobile-interface.png" alt="YASCG app interface" fill className="object-cover" />
               </div>
             </div>
           </div>
         </section>
 
         {/* How to Play Section */}
-        <section
-          id="how-to-play"
-          className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-blue-50 to-purple-50"
-        >
+        <section id="how-to-play" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-blue-50 to-purple-50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -186,8 +157,7 @@ export default function MarketingPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Start a new game room or join an existing one with a room
-                    code. Enter your name to get started.
+                    Start a new game room or join an existing one with a room code. Enter your name to get started.
                   </p>
                 </CardContent>
               </Card>
@@ -200,8 +170,8 @@ export default function MarketingPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Type "/card" to draw a random question about another player.
-                    Answer questions about others in the chat.
+                    Type "/card" to draw a random question about another player. Answer questions about others in the
+                    chat.
                   </p>
                 </CardContent>
               </Card>
@@ -214,8 +184,7 @@ export default function MarketingPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Review and rate answers about yourself. Earn points for good
-                    answers and accurate ratings.
+                    Review and rate answers about yourself. Earn points for good answers and accurate ratings.
                   </p>
                 </CardContent>
               </Card>
@@ -232,16 +201,14 @@ export default function MarketingPage() {
                   What Players Say
                 </h2>
                 <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Don't just take our word for it. Here's what our players think
-                  about YASCG.
+                  Don't just take our word for it. Here's what our players think about YASCG.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl gap-6 py-12 md:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  quote:
-                    "I learned more about my friends in one game than I had in months of hanging out!",
+                  quote: "I learned more about my friends in one game than I had in months of hanging out!",
                   name: "Jamie S.",
                   title: "College Student",
                 },
@@ -252,8 +219,7 @@ export default function MarketingPage() {
                   title: "Team Manager",
                 },
                 {
-                  quote:
-                    "My family plays this every holiday gathering now. So much fun and surprisingly deep!",
+                  quote: "My family plays this every holiday gathering now. So much fun and surprisingly deep!",
                   name: "Sarah K.",
                   title: "Family Game Night Host",
                 },
@@ -268,9 +234,7 @@ export default function MarketingPage() {
                     </blockquote>
                     <div className="mt-4">
                       <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-gray-500">
-                        {testimonial.title}
-                      </p>
+                      <p className="text-sm text-gray-500">{testimonial.title}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -280,10 +244,7 @@ export default function MarketingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section
-          id="faq"
-          className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-purple-50 to-blue-50"
-        >
+        <section id="faq" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-purple-50 to-blue-50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -298,50 +259,37 @@ export default function MarketingPage() {
             <div className="mx-auto max-w-3xl py-12">
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    How many players can join a room?
-                  </AccordionTrigger>
+                  <AccordionTrigger>How many players can join a room?</AccordionTrigger>
                   <AccordionContent>
-                    YASCG works best with 3-8 players, but technically there's
-                    no upper limit. The more players, the more diverse and
-                    interesting the answers!
+                    YASCG works best with 3-8 players, but technically there's no upper limit. The more players, the
+                    more diverse and interesting the answers!
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>
-                    Do I need to create an account?
-                  </AccordionTrigger>
+                  <AccordionTrigger>Do I need to create an account?</AccordionTrigger>
                   <AccordionContent>
-                    No account needed! Just enter your name and a room code to
-                    start playing immediately.
+                    No account needed! Just enter your name and a room code to start playing immediately.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
                   <AccordionTrigger>Is YASCG free to play?</AccordionTrigger>
                   <AccordionContent>
-                    Yes, YASCG is completely free to play. We may add premium
-                    question packs in the future, but the core game will always
-                    be free.
+                    Yes, YASCG is completely free to play. We may add premium question packs in the future, but the core
+                    game will always be free.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
-                  <AccordionTrigger>
-                    Can I play with remote friends?
-                  </AccordionTrigger>
+                  <AccordionTrigger>Can I play with remote friends?</AccordionTrigger>
                   <AccordionContent>
-                    YASCG is designed for both in-person and remote play. Just
-                    share the room code with your friends, and they can join
-                    from anywhere.
+                    YASCG is designed for both in-person and remote play. Just share the room code with your friends,
+                    and they can join from anywhere.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-5">
-                  <AccordionTrigger>
-                    Are the questions appropriate for all ages?
-                  </AccordionTrigger>
+                  <AccordionTrigger>Are the questions appropriate for all ages?</AccordionTrigger>
                   <AccordionContent>
-                    Our default questions are family-friendly and appropriate
-                    for players 13+. We focus on fun, thoughtful questions that
-                    spark conversation without being inappropriate.
+                    Our default questions are family-friendly and appropriate for players 13+. We focus on fun,
+                    thoughtful questions that spark conversation without being inappropriate.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -354,12 +302,9 @@ export default function MarketingPage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Ready to Play?
-                </h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ready to Play?</h2>
                 <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Gather your friends, create a room, and start discovering
-                  surprising things about each other.
+                  Gather your friends, create a room, and start discovering surprising things about each other.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -380,32 +325,21 @@ export default function MarketingPage() {
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4 px-4 md:px-6">
           <div className="flex items-center gap-2">
             <span className="font-bold text-purple-800">YASCG</span>
-            <p className="text-sm text-gray-500">
-              © 2023 Yet Another Strangers Card Game
-            </p>
+            <p className="text-sm text-gray-500">© 2023 Yet Another Strangers Card Game</p>
           </div>
           <nav className="flex gap-4 sm:gap-6">
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
-            >
+            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
               Terms
             </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
-            >
+            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
               Privacy
             </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
-            >
+            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
               Contact
             </Link>
           </nav>
         </div>
       </footer>
     </div>
-  );
+  )
 }
