@@ -8,7 +8,7 @@
 
 ## Phases
 
-- [ ] **Phase 1: Foundation & Auth** - Set up project infrastructure, authentication, and single-user session scaffolding
+- [x] **Phase 1: Foundation & Auth** - Set up project infrastructure, authentication, and single-user session scaffolding
 - [ ] **Phase 2: Core Solo Experience** - Solo conversation mode, journaling, emotion tagging, and rule-based reflection summaries
 - [ ] **Phase 3: Real-Time Shared Sessions** - 1-on-1 and group shared sessions with real-time sync and presence detection
 - [ ] **Phase 4: Decks, Monetization & Polish** - Deck selection UI, freemium paywall, and end-to-end UX refinement
@@ -140,7 +140,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Auth | 3/3 | Planned | 01-01, 01-02, 01-03 |
+| 1. Foundation & Auth | 3/3 | **Complete** | 01-01, 01-02, 01-03 |
 | 2. Core Solo Experience | 0/? | Not started | — |
 | 3. Real-Time Shared Sessions | 0/? | Not started | — |
 | 4. Decks, Monetization & Polish | 0/? | Not started | — |

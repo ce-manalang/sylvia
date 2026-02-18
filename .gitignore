@@ -1,33 +1,23 @@
-# Node modules
+# Dependencies
 node_modules/
 
 # Build output
-.next/
-out/
+dist/
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Environment variables
+# Environment
 .env
+.env.local
 .env.*.local
 
-# OS-specific
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
 Thumbs.db
 
-# Editor folders
-.vscode/
-.idea/
-
-# Optional: local testing/server files
-*.local
-*.log
-
-# Optional: dependency lock files (if you're not using them)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
+# PWA dev artifacts
+dev-dist/
