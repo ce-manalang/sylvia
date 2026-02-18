@@ -19,28 +19,26 @@
 
 ### Phase 1: Foundation & Auth
 
-**Goal:** Establish development environment, user authentication, and app scaffolding so that users can create accounts and the foundation for session modes is ready.
+**Goal:** Establish development environment, local-first data storage, and PWA scaffolding so that the app works offline with persistent journal storage and is installable on mobile devices. No authentication in v1 (deferred to Phase 3).
 
 **Depends on:** Nothing (greenfield start)
 
 **Requirements:**
-- AUTH-01: User can create account with email and password
-- AUTH-02: User can log in with Google or Apple social auth
-- AUTH-03: User session persists across app restarts
-- AUTH-04: User can log out from settings
-- INFRA-01: Real-time data sync for shared sessions (sub-500ms latency)
 - INFRA-02: App functions offline for solo mode with sync on reconnect
 - INFRA-03: Journal entries stored locally with option for cloud backup
-- UX-05: App works on both iOS and Android (cross-platform)
+- UX-05: App works cross-platform (web-first, mobile-responsive)
 
 **Success Criteria** (what must be TRUE when complete):
-1. User can sign up with email/password and receive account confirmation
-2. User can log in with Google or Apple without friction; session persists across app restarts and manual logout
-3. App is deployable on iOS and Android simulators/devices with no platform-specific crashes
-4. Offline-first architecture is in place: app queues writes when offline and syncs on reconnect (validated with network toggle test)
-5. Firebase Auth + Firestore rules are configured with proper security constraints (user-owned data only)
+1. App initializes with React + Vite + Tailwind CSS and is deployable to web with no platform-specific crashes
+2. Local-first architecture is in place: IndexedDB stores journal entries, localStorage stores display name; app works offline with service worker precaching
+3. Welcome screen collects optional display name (local-only, no backend); app persists name across restarts
+4. App is responsive on mobile (375px), tablet (768px), and desktop (1280px) with no horizontal scroll
+5. PWA is installable via "Add to home screen" prompt; runs in standalone mode and loads offline with cached app shell
 
-**Plans:** TBD
+**Plans:** 3 plans
+- [ ] 01-01-PLAN.md — Vite + React + Tailwind + TypeScript initialization
+- [ ] 01-02-PLAN.md — Dexie IndexedDB schema + localStorage hooks + PWA plugin setup
+- [ ] 01-03-PLAN.md — Welcome screen + AppShell components + database integration + checkpoint verification
 
 ---
 
@@ -142,22 +140,24 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Auth | 0/3 | Not started | — |
-| 2. Core Solo Experience | 0/3 | Not started | — |
-| 3. Real-Time Shared Sessions | 0/2 | Not started | — |
-| 4. Decks, Monetization & Polish | 0/2 | Not started | — |
+| 1. Foundation & Auth | 3/3 | Planned | 01-01, 01-02, 01-03 |
+| 2. Core Solo Experience | 0/? | Not started | — |
+| 3. Real-Time Shared Sessions | 0/? | Not started | — |
+| 4. Decks, Monetization & Polish | 0/? | Not started | — |
 
 ---
 
 ## Notes
 
-- **Compression applied:** Quick depth combined 4 natural requirement clusters into 4 phases. Phase 1 (Foundation) and Phase 4 (Monetization) are thin but critical milestones.
+- **Phase 1 scope change:** AUTH-01 through AUTH-04 deferred to Phase 3 (shared sessions). Phase 1 is local-first, user-less, offline-capable foundation with optional display name (no backend).
+- **Tech stack finalized:** React 19 + Vite 7 + Tailwind CSS 4 + Dexie 4.3.0 + vite-plugin-pwa (per user decision and research alignment).
+- **Compression applied:** Quick depth combined 4 natural requirement clusters into 4 phases. Phase 1 focused on infrastructure/offline; Phase 2 on core solo value; Phase 3 on shared/real-time; Phase 4 on monetization.
 - **Research alignment:** Phase structure matches research recommendation (Phase 1 MVP Foundation → Phase 2 Core Solo → Phase 3 Scale to Shared → Phase 4 Monetization).
-- **Real-time priority:** Phase 3 is critical validation point for Firebase sync latency and data integrity (research flags this as highest risk).
-- **Offline-first:** Phase 1 establishes offline queuing; Phases 2-3 inherit and extend it.
+- **Real-time priority:** Phase 3 is critical validation point for sync latency and data integrity (research flags this as highest risk).
+- **Offline-first:** Phase 1 establishes offline queuing with PWA + IndexedDB; Phases 2-3 inherit and extend it.
 - **UX philosophy:** Warm, calm, intentional pacing is woven into every phase (not deferred to Polish).
 
 ---
 
 *Roadmap created: 2026-02-18*
-*Awaiting planning*
+*Phase 1 plans created: 2026-02-18*
