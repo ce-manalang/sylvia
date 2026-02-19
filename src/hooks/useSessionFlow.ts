@@ -42,7 +42,7 @@ export function useSessionFlow(
   );
 
   const currentQuestion = questions[currentIndex];
-  const isComplete = currentIndex >= questions.length;
+  const isComplete = questions.length > 0 && currentIndex >= questions.length;
 
   const currentLevel: ConversationLevel = currentQuestion?.level ?? 'reflection';
 
