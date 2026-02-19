@@ -1,10 +1,10 @@
-import { journalDb } from './schema';
+import { db } from './schema';
 
 export async function initializeDatabase(): Promise<void> {
   try {
-    await journalDb.open();
-    console.log('[DB] JournalDB initialized successfully');
+    await db.open();
+    console.log('[DB] AppDatabase initialized successfully');
   } catch (error) {
-    console.error('[DB] Failed to initialize JournalDB:', error);
+    console.error('[DB] Failed to initialize AppDatabase:', error);
   }
 }

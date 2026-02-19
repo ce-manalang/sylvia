@@ -79,7 +79,10 @@
 6. User can opt out of sensitive prompts and see them skipped naturally (no jarring error states)
 7. Session history persists across app restarts and shows past conversations by date
 
-**Plans:** TBD
+**Plans:** 3 plans
+- [x] 02-01-PLAN.md -- Data models, Dexie schema v2, starter deck, routing, home screen
+- [x] 02-02-PLAN.md -- Conversation flow: card UI, swipe/tap, level progression, timer, onboarding
+- [x] 02-03-PLAN.md -- Journaling, emotion tags, reflection summary, session history, settings
 
 ---
 
@@ -141,7 +144,7 @@
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 3/3 | **Complete** | 01-01, 01-02, 01-03 |
-| 2. Core Solo Experience | 0/? | Not started | — |
+| 2. Core Solo Experience | 3/3 | **Complete** | 02-01, 02-02, 02-03 |
 | 3. Real-Time Shared Sessions | 0/? | Not started | — |
 | 4. Decks, Monetization & Polish | 0/? | Not started | — |
 
